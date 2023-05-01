@@ -14,6 +14,7 @@ using CommandLine;
 using WordCompressPNG;
 using System.Diagnostics;
 using CloudConvert.API.Models.TaskModels;
+using System.IO;
 
 var commandLineArgs = Environment.GetCommandLineArgs();
 var parserResult = Parser.Default.ParseArguments<Options>(commandLineArgs);
@@ -59,6 +60,33 @@ if (string.IsNullOrEmpty(outputWordPath))
 if (!options.Overwrite)
 {
     File.Copy(options.InputPath, outputWordPath, true);
+    long timeout = 1000;
+    bool fileLocked = true;
+    while (timeout > 0 && fileLocked) 
+    {
+        FileStream stream = null;
+
+        try
+        {
+            using (stream = File.OpenRead(outputWordPath))
+            {
+                fileLocked = false;
+            }
+        }
+        catch (IOException ex)
+        {
+            Console.WriteLine($"Unavailable {ex.Message}");
+            await Task.Delay(50);
+            timeout -= 50;
+        }
+    }
+    if (fileLocked)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine($"ERROR: file {outputWordPath} locked after copy.");
+        Console.ResetColor();
+        return;
+    }
 }
 string filename = outputWordPath;
 
