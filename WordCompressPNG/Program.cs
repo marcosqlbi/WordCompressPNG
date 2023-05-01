@@ -64,7 +64,7 @@ if (!options.Overwrite)
     bool fileLocked = true;
     while (timeout > 0 && fileLocked) 
     {
-        FileStream stream = null;
+        FileStream stream;
 
         try
         {
@@ -73,9 +73,8 @@ if (!options.Overwrite)
                 fileLocked = false;
             }
         }
-        catch (IOException ex)
+        catch (IOException)
         {
-            Console.WriteLine($"Unavailable {ex.Message}");
             await Task.Delay(50);
             timeout -= 50;
         }
