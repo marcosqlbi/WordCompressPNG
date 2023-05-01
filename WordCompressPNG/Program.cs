@@ -44,12 +44,14 @@ if (string.IsNullOrEmpty(options.InputPath))
 {
     Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine("ERROR: Missing input file.");
+    Console.ResetColor();
     return;
 }
 if (string.IsNullOrEmpty(outputWordPath))
 {
     Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine("ERROR: Missing output file.");
+    Console.ResetColor();
     return;
 }
 
