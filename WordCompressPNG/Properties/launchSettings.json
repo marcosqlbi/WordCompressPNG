@@ -2,7 +2,7 @@
   "profiles": {
     "WordCompressPNG": {
       "commandName": "Project",
-      "commandLineArgs": "-i K:\\Temp\\doc\\test\\S02M01.docx -o K:\\Temp\\doc\\test\\S02M01-compressed.docx -s --maxfiles 1 --apikey eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOGFkOWI0ZTEyNDMzZTNjNjU0NWJiOGE3NmFkM2QxNjdiNWI2Nzc3NzRhOTFiOWZiMzkxYzA4MzMwZWY0YjYyNjdlYzY0MjczYjYxMmVhMGMiLCJpYXQiOjE2ODI5NDc0ODIuNjAyOTAzLCJuYmYiOjE2ODI5NDc0ODIuNjAyOTA1LCJleHAiOjQ4Mzg2MjEwODIuNjAwMTQ2LCJzdWIiOiI2MzMxNDgyMSIsInNjb3BlcyI6WyJ0YXNrLnJlYWQiLCJ0YXNrLndyaXRlIiwid2ViaG9vay5yZWFkIiwid2ViaG9vay53cml0ZSIsInByZXNldC5yZWFkIiwicHJlc2V0LndyaXRlIl19.GWNq1uijOZEOQj3aLP2Z9wiiBXC_hD1GJPAs_bIzIqeLQwJbi5cciOT8likPYWTFOiReha5qjOIvSb3VcDCr1K-jFQXyoHm2-X04KHOqvdtmCOjpewgVE-AVgMRYWDEirTdtmEHDoUTsldckAtIw8ooDJXL5oe0vsN7K1ASOGFi3EVt4TI87KP5msr02Bl41cmDmJlNI6snu39UAskJP86GIohdg6Gbdri3EqJ-ua1VA9SBBxlM9u3Jm5Bbb0oPfyHiLY38QmuoVDeRMYvSuEwnw9AUaEfSaGE32soZ__j_16ObO6O6NNUNQvgjygHBfzunU-TEzxaZLFvSnZs5zTulhySZC1PzSbvU4GPugzMuX2TVih-ddlyfWjG40WzIF1UOsGCrewoupC8VRvlz3J6CUtVNsEIBp5DSxMzzUookKyjBWQeS1_Pwb02ED460OeZjNzR-8Fm_swyFsqG_WpN3AjBHsDqu7sS1QOc4ZYEKCVeiOxvN5zwdaVO645rYHyHpL2G0_o1L0KfO5LWvAGEQTZRogQ8czhP-xhQ6nNGevrfavraMkZadFQctQxfyVUFlHyEHYOa7s22CAhT1DLWG9Ik1ddPZ3_Mc3ta0fWgMwXvSXi_OBTA9-h-794e-VBRuifu1Nzz-mORwkE_DvGzrX0OzowbO-DqIvLKFzpfk"
+      "commandLineArgs": "-i K:\\Temp\\doc\\test\\S02M01.docx -o K:\\Temp\\doc\\test\\S02M01-compressed.docx -s --maxfiles 1 "
     }
   }
 }
