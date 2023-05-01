@@ -13,6 +13,7 @@ using System.Configuration;
 using CommandLine;
 using WordCompressPNG;
 using System.Diagnostics;
+using CloudConvert.API.Models.TaskModels;
 
 var commandLineArgs = Environment.GetCommandLineArgs();
 var parserResult = Parser.Default.ParseArguments<Options>(commandLineArgs);
@@ -20,7 +21,7 @@ if (parserResult.Errors.Any())
 {
     return;
 }
-var options = parserResult.Value;
+ var options = parserResult.Value;
 
 string? apiKey = options.ApiKey ?? ConfigurationManager.AppSettings["ApiKey"];
 if (string.IsNullOrEmpty(apiKey) || apiKey.StartsWith("***"))
@@ -133,14 +134,32 @@ using (var document = WordprocessingDocument.Open(filename, true))
         if (uploadTask == null) throw new Exception("Upload task not found");
 
         byte[] file = await File.ReadAllBytesAsync(tempFilename);
-        string fileName = @"test.png";
+        // In case of Sandbox use, the file must be whitelisted providing MD5 and filename
+        string fileName = options.Sandbox ? @"test.png" : Path.GetFileName(tempFilename);
         await _cloudConvert.UploadAsync(uploadTask.Result.Form.Url.ToString(), file, fileName, uploadTask.Result.Form.Parameters);
 
-        // Convert 
-        // ?
+        // Convert ...
 
         // Download
         job = await _cloudConvert.WaitJobAsync(job.Data.Id); // Wait for job completion
+        uploadTask = job.Data.Tasks.FirstOrDefault(t => t.Name == "upload");
+        if (uploadTask.Status == CloudConvert.API.Models.Enums.TaskStatus.error)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Upload task failed: {uploadTask.Message}");
+            Console.ResetColor();
+            return;
+        }
+
+        var optimizeTask = job.Data.Tasks.FirstOrDefault(t => t.Name == "optimize");
+        if (optimizeTask == null) throw new Exception("Optimize task not found");
+        if (optimizeTask.Status == CloudConvert.API.Models.Enums.TaskStatus.error)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Optimization task failed: {optimizeTask.Message}");
+            Console.ResetColor();
+            return;
+        }
 
         var downloadTask = job.Data.Tasks.FirstOrDefault(t => t.Name == "download");
         if (downloadTask == null) throw new Exception("Download task not found");
